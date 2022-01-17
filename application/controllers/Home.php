@@ -17,7 +17,7 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$data = array(
-			'title' => 'Dashboard',
+			'title' => 'Dashboard Utama',
 			'active_menu_db' => 'active',
 			'aset' => $this->ma->totalAset(),
 			'wujud' => $this->ma->totalAsetWujud(),
