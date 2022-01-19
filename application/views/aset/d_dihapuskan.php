@@ -135,7 +135,7 @@
                       </td>
                   </tr>
                    <tr>
-                      <td width="100px">Sumber Bantuan</td>
+                      <td width="100px">Asal Perolehan</td>
                       <td width="50px">:</td>
                       <td><?=$d['jenis_bantuan'];?></td>
                   </tr>

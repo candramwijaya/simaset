@@ -44,16 +44,36 @@
             <?php endif ?>                  
             
            <table class="table table-striped" id="users">
-              <tbody>                
+              <tbody>                  
                   <tr>                    
                       <td width="100px">Kode Aset</td>
                       <td width="50px">:</td>
                       <td><?=$d['kode_aset'] ?></td>
                   </tr>
                   <tr>                       
+                      <td width="100px">Nomor Purchase Requisition ( PR )</td>
+                      <td width="50px">:</td>
+                      <td><?=$d['pr_assets'] ?></td>
+                  </tr>             
+                  <tr>                    
+                      <td width="100px">Nomor Purchase Order ( PO )</td>
+                      <td width="50px">:</td>
+                      <td><?=$d['po_assets'] ?></td>
+                  </tr>
+                  <tr>                       
                       <td width="100px">Nama Aset</td>
                       <td width="50px">:</td>
                       <td><?=$d['nama_barang'] ?></td>
+                  </tr>
+                  <tr>                       
+                      <td width="100px">Serial Number</td>
+                      <td width="50px">:</td>
+                      <td><?=$d['sn_assets'] ?></td>
+                  </tr>
+                  <tr>                       
+                      <td width="100px">Tanggal Barang Datang</td>
+                      <td width="50px">:</td>
+                      <td><?=date('d M Y',strtotime($d['tglbarangdatang_assets'])); ?></td>
                   </tr>
                   <tr>                       
                       <td width="100px">Nama User</td>
@@ -140,7 +160,7 @@
                       </td>
                   </tr>
                    <tr>
-                      <td width="100px">Sumber Bantuan</td>
+                      <td width="100px">Asal Perolehan</td>
                       <td width="50px">:</td>
                       <td><?=$d['jenis_bantuan'];?></td>
                   </tr>

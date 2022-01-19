@@ -3,6 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ModelAset extends CI_Model {
 
+	public function get_id(){
+		$this->db->select('id_increment,kode_kategori,id_aset');
+		$this->db->from('asets');
+		$this->db->join('barang','asets.id_barang=barang.id_barang');
+		$this->db->join('kategori_barang','barang.id_kategori=kategori_barang.id_kategori');
+		$this->db->where('kode_aset IS NULL');
+		return $this->db->get();
+	}
+
 	public function getAsetWujud()
 	{
 		$this->db->select('*');

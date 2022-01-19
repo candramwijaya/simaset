@@ -46,7 +46,7 @@
               <?= validation_errors(); ?>
             </div>
           <?php endif ?>
-          <p>*Keterangan Kode Aset :</p>
+          <!-- <p>*Keterangan Kode Aset :</p>
           <ul>
             <li>0000 = Kode Aset (0001/0002..dst) </li>
             <li>XXX = Kategori Aset (TIK,GEDUNG,dll)</li>
@@ -55,13 +55,25 @@
               <input type="text" size="30" value="0000/XXX/20XX" id="myInput">
               <button onclick="myFunction()">Salin Teks</button>
             </li>
-          </ul>
+          </ul> -->
           <form class="form-horizontal" action="<?=base_url('aset_wujud/simpan')?>" autocomplete="off" method="post">
             <div class="card-body">
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label for="kode_aset" class="col-sm-2 col-form-label">Kode Aset*</label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" name="kode_aset" placeholder="0000/XXX/20XX" required autofocus>
+                  <input type="text" class="form-control" name="kode_aset" placeholder="0000/XXX/20XX" autofocus>
+                </div>
+              </div> -->
+              <div class="form-group row">
+                <label for="pr_assets" class="col-sm-2 col-form-label">Nomor Purchase Requisition ( PR )</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" name="pr_assets" placeholder="Masukan PR" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="po_assets" class="col-sm-2 col-form-label">Nomor Purchase Order ( PO )</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" name="po_assets" placeholder="Masukan PO" required>
                 </div>
               </div>
               <div class="form-group row">
@@ -73,6 +85,25 @@
                           <option value="<?=$key['id_barang'];?>"><?=$key['nama_barang'];?></option>
                         <?php } ?> 
                   </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="sn_assets" class="col-sm-2 col-form-label">Serial Number</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" name="sn_assets" placeholder="Masukan Serial Number">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="tglbarangdatang_assets" class="col-sm-2 col-form-label">Tanggal Barang Datang</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" name="tglbarangdatang_assets" placeholder="Masukan Tanggal Barang Datang">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="picture" class="col-sm-2 col-form-label">Foto Barang</label>
+                <div class="col-sm-6">
+                  <input type="file" class="form-control" name="picture">
+                  <small>Kosongkan jika tidak diisi</small>
                 </div>
               </div>
               <div class="form-group row">
@@ -154,13 +185,13 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="jenis_bantuan" class="col-sm-2 col-form-label">Jenis Bantuan</label>
+                <label for="jenis_bantuan" class="col-sm-2 col-form-label">Asal Perolehan</label>
                 <div class="col-sm-6">
                   <select name="jenis_bantuan" class="form-control" required>
                     <option value="">- Pilih --</option>
-                    <option value="Sekolah">Sekolah</option>
-                    <option value="Yayasan">Yayasan</option>
-                    <option value="Pemerintah">Pemerintah</option>     
+                    <option value="GA">General Affair</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="Hibah">Hibah</option>     
                   </select>
                 </div>
               </div>

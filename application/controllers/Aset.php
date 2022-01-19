@@ -58,18 +58,20 @@ class Aset extends CI_Controller {
 
 	public function simpanAset()
 	{
-		$this->form_validation->set_rules('kode_aset','Kode Aset','required|trim|is_unique[asets.kode_aset]',
-			array(
-				'required'=>"<p>Kode Aset tidak boleh kosong</p>",
-				'is_unique'=>"<p>Kode Aset sudah digunakan</p>",
-			)
-		);
+		// $this->form_validation->set_rules('kode_aset','Kode Aset','required|trim|is_unique[asets.kode_aset]',
+		// 	array(
+		// 		'required'=>"<p>Kode Aset tidak boleh kosong</p>",
+		// 		'is_unique'=>"<p>Kode Aset sudah digunakan</p>",
+		// 	)
+		// );
 
-		if ($this->form_validation->run() != FALSE) {
+
+
+		// if ($this->form_validation->run() != FALSE) {
 			$generate = $this->input->post('generate');
 			if ($generate) {
 
-				$kode_aset = $this->input->post('kode_aset');
+				// $kode_aset = $this->input->post('kode_aset');
 
 		        $config['cacheable']    = true; //boolean, the default is true
 		        $config['cachedir']     = './src/'; //string, the default is application/cache/
@@ -104,9 +106,17 @@ class Aset extends CI_Controller {
 		        $data = array(
 		        	'id_aset' => $id_aset,
 					'user_id' => $this->input->post('user_id'),
-		        	'kode_aset' => $kode_aset,
+		        	// 'kode_aset' => $kode_aset,
 		        	'id_barang' => $this->input->post('id_barang'),
 		        	'id_lokasi' => $this->input->post('id_lokasi'),
+		        	'pr_assets' => $this->input->post('pr_assets'),
+		        	'po_assets' => $this->input->post('po_assets'),
+		        	'sn_assets' => $this->input->post('sn_assets'),
+		        	'tglbarangdatang_assets' => $this->input->post('tglbarangdatang_assets'),
+		        	'id_user_input' => $this->session->userdata("id_user"),
+		        	'tgl_input' => date('Y-m-d H:i:s'),
+		        	'device_input' => $_SERVER['HTTP_USER_AGENT'],
+		        	'ip_input' => $_SERVER['REMOTE_ADDR'],
 		        	'volume' => $volume,
 		        	'satuan_id' => $this->input->post('satuan_id'),
 		        	'harga' => $harga,
@@ -120,6 +130,14 @@ class Aset extends CI_Controller {
 		        );
 
 		        $result = $this->ma->storeAset($data);
+
+		        $get_id = $this->ma->get_id()->result_array();
+
+		        foreach($get_id as $gs){
+		        	$data_get['kode_aset'] = $gs['id_increment'].'/'.$gs['kode_kategori'].'/'.date('Y');
+		        	echo $gs['id_increment'].'/'.$gs['kode_kategori'].'/'.date('Y').'AS';
+		        	$this->ma->updateAset($gs['id_aset'],$data_get);
+		        }
 
 		        if($result>=1){
 		        	$this->session->set_flashdata('sukses', 'Disimpan');
@@ -141,9 +159,17 @@ class Aset extends CI_Controller {
 				$data = array(
 					'id_aset' => $id_aset,
 					'user_id' => $this->input->post('user_id'),
-		        	'kode_aset' => $this->input->post('kode_aset'),
+		        	// 'kode_aset' => $this->input->post('kode_aset'),
 		        	'id_barang' => $this->input->post('id_barang'),
 		        	'id_lokasi' => $this->input->post('id_lokasi'),
+		        	'pr_assets' => $this->input->post('pr_assets'),
+		        	'po_assets' => $this->input->post('po_assets'),
+		        	'sn_assets' => $this->input->post('sn_assets'),
+		        	'tglbarangdatang_assets' => $this->input->post('tglbarangdatang_assets'),
+		        	'id_user_input' => $this->session->userdata("id_user"),
+		        	'tgl_input' => date('Y-m-d H:i:s'),
+		        	'device_input' => $_SERVER['HTTP_USER_AGENT'],
+		        	'ip_input' => $_SERVER['REMOTE_ADDR'],
 		        	'volume' => $volume,
 					'satuan_id' => $this->input->post('satuan_id'),
 		        	'harga' => $harga,
@@ -157,6 +183,14 @@ class Aset extends CI_Controller {
 
 		        $result = $this->ma->storeAset($data);
 
+		        $get_id = $this->ma->get_id()->result_array();
+
+		        foreach($get_id as $gs){
+		        	$data_get['kode_aset'] = $gs['id_increment'].'/'.$gs['kode_kategori'].'/'.date('Y');
+		        	echo $gs['id_increment'].'/'.$gs['kode_kategori'].'/'.date('Y').'Ab';
+		        	$this->ma->updateAset($gs['id_aset'],$data_get);
+		        }
+
 		        if($result>=1){
 		        	$this->session->set_flashdata('sukses', 'Disimpan');
 		        	redirect('aset_wujud');
@@ -166,20 +200,20 @@ class Aset extends CI_Controller {
 		        }
 
 			}
-		} else {
-			$data = array(
-				'title' => 'Aset Berwujud',
-				'active_menu_open' => 'menu-open',
-				'active_menu_aset' => 'active',
-				'active_menu_wujud' => 'active',
-				'aset' => $this->ma->getAsetWujud(),
-				'brg' => $this->mb->getDataBarang(),
-				'lokasi' => $this->ml->getLokasi()
-			);
-			$this->load->view('layouts/header',$data);
-			$this->load->view('aset/c_wujud',$data);
-			$this->load->view('layouts/footer');
-		}		
+		// } else {
+		// 	$data = array(
+		// 		'title' => 'Aset Berwujud',
+		// 		'active_menu_open' => 'menu-open',
+		// 		'active_menu_aset' => 'active',
+		// 		'active_menu_wujud' => 'active',
+		// 		'aset' => $this->ma->getAsetWujud(),
+		// 		'brg' => $this->mb->getDataBarang(),
+		// 		'lokasi' => $this->ml->getLokasi()
+		// 	);
+		// 	$this->load->view('layouts/header',$data);
+		// 	$this->load->view('aset/c_wujud',$data);
+		// 	$this->load->view('layouts/footer');
+		// }		
 	}
 
 	public function editAset($id_aset)
@@ -204,19 +238,19 @@ class Aset extends CI_Controller {
 
 	public function ubahAset()
 	{
-		$this->form_validation->set_rules('kode_aset','Kode Aset','required|trim',
-			array(
-				'required'=>"<p>Kode Aset tidak boleh kosong</p>"
-			)
-		);
+		// $this->form_validation->set_rules('kode_aset','Kode Aset','required|trim',
+		// 	array(
+		// 		'required'=>"<p>Kode Aset tidak boleh kosong</p>"
+		// 	)
+		// );
 
 		$id_aset = $this->input->post('id_aset');
 
-		if ($this->form_validation->run() != FALSE) {
+		// if ($this->form_validation->run() != FALSE) {
 			$generate = $this->input->post('generate');
 			if ($generate) {
 
-				$kode_aset = $this->input->post('kode_aset');
+				// $kode_aset = $this->input->post('kode_aset');
 
 		        $config['cacheable']    = true; //boolean, the default is true
 		        $config['cachedir']     = './src/'; //string, the default is application/cache/
@@ -246,10 +280,18 @@ class Aset extends CI_Controller {
 		        $total = ($volume*$harga);
 
 		        $data = array(
-		        	'kode_aset' => $kode_aset,
+		        	// 'kode_aset' => $kode_aset,
 					'user_id' => $this->input->post('user_id'),
 		        	'id_barang' => $this->input->post('id_barang'),
 		        	'id_lokasi' => $this->input->post('id_lokasi'),
+		        	'pr_assets' => $this->input->post('pr_assets'),
+		        	'po_assets' => $this->input->post('po_assets'),
+		        	'sn_assets' => $this->input->post('sn_assets'),
+		        	'tglbarangdatang_assets' => $this->input->post('tglbarangdatang_assets'),
+		        	'id_user_ubah' => $this->session->userdata("id_user"),
+		        	'tgl_ubah' => date('Y-m-d H:i:s'),
+		        	'device_ubah' => $_SERVER['HTTP_USER_AGENT'],
+		        	'ip_ubah' => $_SERVER['REMOTE_ADDR'],
 		        	'volume' => $volume,
 		        	'satuan_id' => $this->input->post('satuan_id'),
 		        	'harga' => $harga,
@@ -283,10 +325,18 @@ class Aset extends CI_Controller {
 		        $total = ($volume*$harga);
 				
 				$data = array(
-		        	'kode_aset' => $this->input->post('kode_aset'),
+		        	// 'kode_aset' => $this->input->post('kode_aset'),
 					'user_id' => $this->input->post('user_id'),
 		        	'id_barang' => $this->input->post('id_barang'),
 		        	'id_lokasi' => $this->input->post('id_lokasi'),
+		        	'pr_assets' => $this->input->post('pr_assets'),
+		        	'po_assets' => $this->input->post('po_assets'),
+		        	'sn_assets' => $this->input->post('sn_assets'),
+		        	'tglbarangdatang_assets' => $this->input->post('tglbarangdatang_assets'),
+		        	'id_user_ubah' => $this->session->userdata("id_user"),
+		        	'tgl_ubah' => date('Y-m-d H:i:s'),
+		        	'device_ubah' => $_SERVER['HTTP_USER_AGENT'],
+		        	'ip_ubah' => $_SERVER['REMOTE_ADDR'],
 		        	'volume' => $volume,
 		        	'satuan_id' => $this->input->post('satuan_id'),
 		        	'harga' => $harga,
@@ -310,20 +360,20 @@ class Aset extends CI_Controller {
 		        }
 
 			}
-		} else {
-			$data = array(
-				'title' => 'Aset Berwujud',
-				'active_menu_open' => 'menu-open',
-				'active_menu_aset' => 'active',
-				'active_menu_wujud' => 'active',
-				'aset' => $this->ma->getDetailAsetWujud($id_aset),
-				'brg' => $this->mb->getDataBarang(),
-				'lokasi' => $this->ml->getLokasi()
-			);
-			$this->load->view('layouts/header',$data);
-			$this->load->view('aset/u_wujud',$data);
-			$this->load->view('layouts/footer');
-		}		
+		// } else {
+		// 	$data = array(
+		// 		'title' => 'Aset Berwujud',
+		// 		'active_menu_open' => 'menu-open',
+		// 		'active_menu_aset' => 'active',
+		// 		'active_menu_wujud' => 'active',
+		// 		'aset' => $this->ma->getDetailAsetWujud($id_aset),
+		// 		'brg' => $this->mb->getDataBarang(),
+		// 		'lokasi' => $this->ml->getLokasi()
+		// 	);
+		// 	$this->load->view('layouts/header',$data);
+		// 	$this->load->view('aset/u_wujud',$data);
+		// 	$this->load->view('layouts/footer');
+		// }		
 	}
 
 	public function detailAset($id_aset)
