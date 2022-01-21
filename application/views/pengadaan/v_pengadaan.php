@@ -68,83 +68,39 @@
                 <thead>
                 <tr>
                   <th>No.</th>
-                  <!-- <th>Nama</th>
-                  <th>Penempatan</th> -->
-                  <th>Nama Aset</th>
-                  <th>Tahun</th>
-                  <th>Status</th>
+                  <th>Tanggal Pengajuan</th>
+                  <th>User</th>
+                  <th>Jabatan</th>
+                  <th>Tahun Pengadaan</th>
+                  <th>Jumlah Item</th>
+                  <th>Total Harga</th>
+                  <th>Status Pengajuan</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
                   <?php $no=1; foreach ($item as $row): ?>               
                   <tr>
                     <td><?=$no++;?></td>
-                    <!-- <td><?=$row['nama_user'];?></td>
-                    <td><?=$row['nama_lokasi'];?></td> -->
-                    <td><?=$row['nama_barang'];?></td>
+                    <td><?= date('d M Y',strtotime($row['tgl_keranjang']));?></td>
+                    <td><?=$row['nama_user'];?></td>
+                    <td><?=$row['jabatan'];?></td>
                     <td><?=$row['tahun_pengadaan'];?></td>
-                    <td>
-
-                      <?php if ($row['status']=='0'): ?>
-                        <a class="btn btn-primary btn-sm" href="<?=base_url('pengadaan/setujui/'.$row['id_pengadaan'])?>">
-                          <i class="fa fa-check"></i> Setujui
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="<?=base_url('pengadaan/tolak/'.$row['id_pengadaan'])?>">
-                          <i class="fa fa-times"></i> Tolak
-                        </a>
-                        <?php else: ?>
-                          <?php if ($row['status']=='1'): ?>
-                            <span class="badge badge-success">Disetujui</span>
-                          <?php else: ?>
-                            <span class="badge badge-danger">Ditolak</span>
-                          <?php endif ?>
-                          
-                        <?php endif ?>
-                                         
-                      </td>
+                    <td><?=number_format($row['Jumlah'],0);?></td>
+                    <td><?=number_format($row['total'],0);?></td>
+                    <td><?php if($row['status']=='0'){echo 'Pengajuan SPV';}else{
+                      if($row['status']=='1'){echo 'Pengajuan MGR';}}?></td>
                       <td>
-                        <a href="<?=base_url('pengadaan/detail/'.$row['id_pengadaan'])?>" class="btn btn-success btn-sm">
+                        <a href="<?=base_url('pengadaan/detail/'.$row['tgl_keranjang'])?>" class="btn btn-success btn-sm">
                           <i class="fas fa-eye"></i>
                         </a>
-                        <a href="<?=base_url('pengadaan/hapus/'.$row['id_pengadaan'])?>" class="btn btn-danger btn-sm tombol-hapus">
+                        <a href="<?=base_url('pengadaan/hapus/'.$row['tgl_keranjang'])?>" class="btn btn-danger btn-sm tombol-hapus">
                           <i class="fas fa-trash"></i>
                         </a>
                       </td>
                     </tr>
                   <?php endforeach ?>
-
-                <?php else: ?>
-
-                 <?php $no=1; foreach ($item_user as $row): ?>               
-                 <tr>
-                  <td><?=$no++;?></td>
-                  <td><?=$row['nama_user'];?></td>
-                  <td><?=$row['nama_lokasi'];?></td>
-                  <td><?=$row['nama_aset'];?></td>
-                  <td><?=$row['tahun_pengadaan'];?></td>
-                  <td>
-                        <?php if ($row['status']=='0'){ ?>
-                          <span class="badge badge-danger">Belum Disetujui</span>
-                        <?php }else if ($row['status']=='1'){ ?>
-                          <span class="badge badge-success">Disetujui</span>
-                        <?php }else{ ?>
-                          <span class="badge badge-danger">Ditolak</span>
-                        <?php } ?>                 
-                  </td>
-                    <td>
-                      <a href="<?=base_url('pengadaan/detail/'.$row['id_pengadaan'])?>" class="btn btn-success btn-sm">
-                        <i class="fas fa-eye"></i>
-                      </a>
-                      <a href="<?=base_url('pengadaan/hapus/'.$row['id_pengadaan'])?>" class="btn btn-danger btn-sm tombol-hapus">
-                        <i class="fas fa-trash"></i>
-                      </a>
-                    </td>
-                  </tr>
-                <?php endforeach ?>
-
-                <?php endif ?>               
+        
                 </tbody>
               </table>
             </div> 

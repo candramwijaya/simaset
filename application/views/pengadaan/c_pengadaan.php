@@ -198,7 +198,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
                   <?php $no=1; foreach ($item as $row): ?>               
                   <tr>
                     <td><?=$no++;?></td>
@@ -218,8 +217,7 @@
                       </td>
                     </tr>
                   <?php endforeach ?>
-
-                <?php endif ?>               
+            
                 </tbody>
               </table>
               <form action="<?=base_url('PengajuanPengadaan')?>">

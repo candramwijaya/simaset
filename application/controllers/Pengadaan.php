@@ -260,8 +260,7 @@ class Pengadaan extends CI_Controller {
 			'active_pengadaan' => 'active',
 			'active_menu_pgd' => 'active',
 			'lokasi' => $this->ml->getLokasi(),
-			'item' => $this->mp->getPengadaanAset_new(),
-			'item_user' => $this->mp->getPengadaanAsetUser($id_user)
+			'item' => $this->mp->getPengadaanlihat()->result_array()
 		);
 		$this->load->view('layouts/header',$data);
 		$this->load->view('pengadaan/v_pengadaan',$data);

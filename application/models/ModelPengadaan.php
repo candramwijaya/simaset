@@ -92,6 +92,16 @@ class ModelPengadaan extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getPengadaanlihat(){
+		$this->db->select('tgl_keranjang,nama_user,jabatan,count(tgl_keranjang) as Jumlah,SUM(harga_satuan*volume) as total,tahun_pengadaan,status');
+		$this->db->from('pengadaan a');
+		$this->db->join('users b', 'b.id_user = a.id_user');
+		$this->db->where('status_keranjang','1');
+		$this->db->where('a.id_user',$this->session->userdata('id_user'));
+		$this->db->group_by('1,2,3');
+		return $this->db->get();
+	}
+
 	public function update_PengajuanPengadaan($id,$data){
 		$this->db->where('id_user',$id);
 		$this->db->where('status_keranjang','0');
