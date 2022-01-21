@@ -16,6 +16,9 @@ class Pengadaan extends CI_Controller {
 	    $this->load->model('ModelLokasi','ml');
 	    $this->load->model('ModelMonitoring','mm');
 		$this->load->model('Master','m');
+		$this->load->model('ModelKategori','mk');
+		$this->load->model('ModelBarang','mb');
+
 	}
 
 	public function index()
@@ -191,25 +194,61 @@ class Pengadaan extends CI_Controller {
 	}
 
 	//Pengadaan
-	public function pengajuan()
+	public function pengajuan($id=null)
 	{
+		if($id==null){
 		$data = array(
 			'title' => 'Pengajuan',
 			'active_menu_open_pnd' => 'menu-open',
 			'active_pengadaan' => 'active',
 			'active_menu_pnd' => 'active',
-			'lokasi' => $this->ml->getLokasi(),
+			'kategori' => $this->mk->getKategoriBarang(),
 			'nilai' => $this->mp->getPenilaian(),
 			'maxspek' => $this->mp->getMaxSpesifikasi(),
 			'maxkual' => $this->mp->getMaxKualitas(),
 			'minharga' => $this->mp->getMinHarga(),
 			'mt' => $this->mm->getMonitoring(),
 			'satuan' => $this->m->getAllData('satuan'),
+			'item' => $this->mp->getPengadaanAset_new(),
 			'user' => $this->m->getAllData('users'),  
 		);
+		}else{
+			$cek = $this->mp->getDetailPengadaanAset_new($id);
+			if(!empty($cek->kategori_id)){
+			$data = array(
+			'id_unik' => $id,
+			'data_pengadaan' => $this->mp->getDetailPengadaanAset_new($id),
+			'data_sub_kategori' => $this->mk->get_sub_category($cek->kategori_id)->result_array(),
+			'data_barang' => $this->mb->get_barangsub($cek->id_sub_kategori),
+			'title' => 'Pengajuan',
+			'active_menu_open_pnd' => 'menu-open',
+			'active_pengadaan' => 'active',
+			'active_menu_pnd' => 'active',
+			'kategori' => $this->mk->getKategoriBarang(),
+			'nilai' => $this->mp->getPenilaian(),
+			'maxspek' => $this->mp->getMaxSpesifikasi(),
+			'maxkual' => $this->mp->getMaxKualitas(),
+			'minharga' => $this->mp->getMinHarga(),
+			'mt' => $this->mm->getMonitoring(),
+			'satuan' => $this->m->getAllData('satuan'),
+			'item' => $this->mp->getPengadaanAset_new(),
+			'user' => $this->m->getAllData('users'),  
+			);
+			}else{
+				redirect('pengajuan');
+			}
+		}
 		$this->load->view('layouts/header',$data);
 		$this->load->view('pengadaan/c_pengadaan',$data);
 		$this->load->view('layouts/footer');
+	}
+
+	public function pengajuan_sub_kategori($id){
+		echo json_encode($this->mk->get_sub_category($id)->result_array());
+	}
+
+	public function pengajuan_nama_item($id){
+		echo json_encode($this->mb->get_barangsub($id));
 	}
 
 	public function pengadaan()
@@ -221,7 +260,7 @@ class Pengadaan extends CI_Controller {
 			'active_pengadaan' => 'active',
 			'active_menu_pgd' => 'active',
 			'lokasi' => $this->ml->getLokasi(),
-			'item' => $this->mp->getPengadaanAset(),
+			'item' => $this->mp->getPengadaanAset_new(),
 			'item_user' => $this->mp->getPengadaanAsetUser($id_user)
 		);
 		$this->load->view('layouts/header',$data);
@@ -232,11 +271,10 @@ class Pengadaan extends CI_Controller {
 	public function simpanPengadaan()
 	{
 		$id_user = $this->session->userdata('id_user');
+		if(empty($this->input->post('id_unik'))){
 		$data = array(
-			'id_lokasi' => $this->input->post('id_lokasi'),
 			'id_user' => $id_user,
-			'user_name' => $this->input->post('user_name'),
-			'nama_aset' => $this->input->post('nama_aset'),
+			'nama_item' => $this->input->post('nama_item'),
 			'volume' => $this->input->post('volume'),
 			'satuan' => $this->input->post('satuan'),
 			'harga_satuan' => $this->input->post('harga_satuan'),
@@ -246,6 +284,20 @@ class Pengadaan extends CI_Controller {
 		);
 
 		$result = $this->mp->storePengadaan($data);
+
+		}else{
+		$data = array(
+			'id_user' => $id_user,
+			'nama_item' => $this->input->post('nama_item'),
+			'volume' => $this->input->post('volume'),
+			'satuan' => $this->input->post('satuan'),
+			'harga_satuan' => $this->input->post('harga_satuan'),
+			'tahun_pengadaan' => $this->input->post('tahun_pengadaan'),
+			'status' => '0',
+		);
+		$result = $this->mp->updatePengadaan($this->input->post('id_unik'),$data);
+
+		}	
 
 		if($result>=1){
 			$this->session->set_flashdata('sukses', 'Disimpan');
@@ -313,6 +365,31 @@ class Pengadaan extends CI_Controller {
 			$this->session->set_flashdata('gagal', 'Dihapus');
 			redirect('pengadaan');
 		}
+	}
+
+	public function hapusPengadaankeranjang($id_pengadaan)
+	{
+		$id_pengadaan = $this->uri->segment(3);
+		$where = array( 'id_pengadaan' => $id_pengadaan);
+		$res = $this->mp->deletePengadaan($where);
+		if($res>=1){
+			$this->session->set_flashdata('sukses', 'Dihapus');
+			redirect('pengajuan');
+		}else{
+			$this->session->set_flashdata('gagal', 'Dihapus');
+			redirect('pengajuan');
+		}
+	}
+
+	public function PengajuanPengadaan(){
+		$data = array(
+			'status_keranjang' => '1',
+			'tgl_keranjang' => date('Y-m-d H:i:s'),
+        	'device_keranjang' => $_SERVER['HTTP_USER_AGENT'],
+        	'ip_keranjang' => $_SERVER['REMOTE_ADDR']
+		);
+		$result = $this->mp->update_PengajuanPengadaan($this->session->userdata('id_user'),$data);
+		redirect('pengajuan');
 	}
 
 	public function filterPengadaan()

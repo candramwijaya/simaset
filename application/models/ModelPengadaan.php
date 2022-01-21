@@ -79,6 +79,26 @@ class ModelPengadaan extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getPengadaanAset_new()
+	{
+		$this->db->select('nama_barang,nama_sub,nama_kategori,a.nama_item,a.tahun_pengadaan, a.id_pengadaan,a.volume,a.satuan,a.harga_satuan');
+		$this->db->from('pengadaan a');
+		$this->db->join('barang b', 'b.id_barang = a.nama_item');
+		$this->db->join('sub_kategori c', 'c.kode_sub = b.id_sub_kategori');
+		$this->db->join('kategori_barang d', 'd.id_kategori = c.kategori_id');
+		$this->db->where('status_keranjang','0');
+		$this->db->where('id_user',$this->session->userdata('id_user'));
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function update_PengajuanPengadaan($id,$data){
+		$this->db->where('id_user',$id);
+		$this->db->where('status_keranjang','0');
+        $res = $this->db->update('pengadaan',$data);
+        return $res;
+	}
+
 	public function getPengadaanAsetUser($id_user)
 	{
 		$this->db->select('*');
@@ -99,6 +119,20 @@ class ModelPengadaan extends CI_Model {
 		$this->db->where('id_pengadaan', $id_pengadaan);
 		$query = $this->db->get();
 		return $query->result_array();
+	}
+
+	public function getDetailPengadaanAset_new($id_pengadaan)
+	{
+		$this->db->select('nama_barang,nama_sub,nama_kategori,a.nama_item,a.tahun_pengadaan, a.id_pengadaan,a.volume,a.satuan,a.harga_satuan,c.kategori_id,b.id_sub_kategori');
+		$this->db->from('pengadaan a');
+		$this->db->join('barang b', 'b.id_barang = a.nama_item');
+		$this->db->join('sub_kategori c', 'c.kode_sub = b.id_sub_kategori');
+		$this->db->join('kategori_barang d', 'd.id_kategori = c.kategori_id');
+		$this->db->where('id_pengadaan', $id_pengadaan);
+		$this->db->where('status_keranjang','0');
+		$this->db->where('id_user',$this->session->userdata('id_user'));
+		$query = $this->db->get();
+		return $query->row();
 	}
 
 	public function getFilterPengadaanAset($id_lokasi,$tahun_pengadaan)

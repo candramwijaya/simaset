@@ -14,6 +14,15 @@ class ModelBarang extends CI_Model {
 		return $query->result_array(); 
 	}
 
+	public function get_barangsub($id_sub_kategori)
+	{
+		$this->db->select('id_barang,nama_barang');
+		$this->db->from('barang');
+		$this->db->where('id_sub_kategori', $id_sub_kategori);
+		$query = $this->db->get();
+		return $query->result_array(); 
+	}
+
 	public function getDetailBarang($id_barang)
 	{
 		$this->db->select('*');
