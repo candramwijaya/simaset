@@ -68,8 +68,8 @@
                 <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Nama</th>
-                  <th>Penempatan</th>
+                  <!-- <th>Nama</th>
+                  <th>Penempatan</th> -->
                   <th>Nama Aset</th>
                   <th>Tahun</th>
                   <th>Status</th>
@@ -81,9 +81,9 @@
                   <?php $no=1; foreach ($item as $row): ?>               
                   <tr>
                     <td><?=$no++;?></td>
-                    <td><?=$row['nama_user'];?></td>
-                    <td><?=$row['nama_lokasi'];?></td>
-                    <td><?=$row['nama_aset'];?></td>
+                    <!-- <td><?=$row['nama_user'];?></td>
+                    <td><?=$row['nama_lokasi'];?></td> -->
+                    <td><?=$row['nama_barang'];?></td>
                     <td><?=$row['tahun_pengadaan'];?></td>
                     <td>
 

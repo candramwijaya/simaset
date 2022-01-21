@@ -76,13 +76,18 @@ $route['test'] = 'Pengadaan/testpk';
 
 //Pengadaan
 $route['pengajuan'] = 'Pengadaan/pengajuan';
+$route['pengajuan/(:any)'] = 'Pengadaan/pengajuan/$1';
 $route['pengadaan'] = 'Pengadaan/pengadaan';
+$route['pengajuan_sub_kategori/(:any)'] = 'Pengadaan/pengajuan_sub_kategori/$1';
+$route['pengajuan_nama_item/(:any)'] = 'Pengadaan/pengajuan_nama_item/$1';
 $route['pengadaan/simpan'] = 'Pengadaan/simpanPengadaan';
 $route['pengadaan/detail/(:any)'] = 'Pengadaan/detailPengadaan/(:any)';
 $route['pengadaan/setujui/(:any)'] = 'Pengadaan/setujuiPengadaan/(:any)';
 $route['pengadaan/tolak/(:any)'] = 'Pengadaan/tolakPengadaan/(:any)';
 $route['pengadaan/hapus/(:any)'] = 'Pengadaan/hapusPengadaan/(:any)';
+$route['pengadaan/hapus_keranjang/(:any)'] = 'Pengadaan/hapusPengadaankeranjang/(:any)';
 $route['pengadaan/filter'] = 'Pengadaan/filterPengadaan';
+$route['PengajuanPengadaan'] = 'Pengadaan/PengajuanPengadaan';
 
 //Monitoring
 $route['monitoring'] = 'Monitoring/index';

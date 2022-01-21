@@ -144,12 +144,6 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?=base_url('barang')?>" class="nav-link <?=isset($active_menu_brg)?$active_menu_brg:'' ?>">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Barang</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="<?=base_url('kategori')?>" class="nav-link <?=isset($active_menu_jb)?$active_menu_jb:'' ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kategori Barang</p>
@@ -159,6 +153,12 @@
               <a href="<?=base_url('sub-kategori')?>" class="nav-link <?=isset($active_menu_sk)?$active_menu_sk:'' ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Sub Kategori</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?=base_url('barang')?>" class="nav-link <?=isset($active_menu_brg)?$active_menu_brg:'' ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Barang</p>
               </a>
             </li>
             <li class="nav-item">
