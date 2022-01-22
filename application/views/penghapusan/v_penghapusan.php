@@ -2,6 +2,13 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="<?=base_url()?>src/backend/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="<?=base_url()?>src/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+<!-- Jquery date timepicker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -81,11 +88,17 @@
                       <textarea name="faktor" placeholder="Masukan Faktor Penyebab.." class="form-control" required></textarea>
                     </div>
                   </div>
+                  <script>
+		                $( function() {
+            	      	$( "#datepicker" ).datepicker();
+                  	} );
+                  </script>
                   <div class="form-group row">
                     <label for="tgl_penghapusan" class="col-sm-3 col-form-label">Tanggal Penghapusan</label>
                     <div class="col-sm-6">
                       <div class="input-group mb-3">
-                        <input type="date" name="tgl_penghapusan" class="form-control" required>
+                        <!-- <input type="date" name="tgl_penghapusan" class="form-control" required> -->
+                        <input type="text" id="datepicker" name="tgl_penghapusan" class="form-control" placeholder="Masukan Tanggal Penghapusan" required>	
                       </div>
                     </div>
                   </div>          
