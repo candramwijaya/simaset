@@ -21,8 +21,50 @@ class KategoriBarang extends CI_Controller {
 		);
 	
 		$this->load->view('layouts/header',$data);
-		$this->load->view('master/v_jb',$data);
+		$this->load->view('master/v_jb1',$data);
 		$this->load->view('layouts/footer');
+	}
+	public function filter()
+	{
+		
+		$data = array(
+			'title' => 'Jenis Barang',
+			'active_menu_master' => 'menu-open',
+			'active_menu_mst' => 'active',
+			'active_menu_jb' => 'active',
+			'jb' => $this->mk->getfilterKategoriBarang($this->input->post('kata_kunci'))  
+		);
+
+		
+
+		$this->load->view('layouts/header',$data);
+		$this->load->view('master/v_jb1',$data);
+		$this->load->view('layouts/footer');
+	}
+	public function search()
+	{
+		
+		$data = array(
+			'title' => 'Jenis Barang',
+			'active_menu_master' => 'menu-open',
+			'active_menu_mst' => 'active',
+			'active_menu_jb' => 'active',
+			'jb' => $this->mk->getfilterKategoriBarang($this->input->post('kata_kunci'))  
+		);
+
+		// Kita load file view.php sambil mengirim data siswa hasil query function search di SiswaModel
+		$hasil = $this->load->view('master/vfil_jb', array('kategori'=>$data), true);
+	
+		// Buat sebuah array
+		$callback = array(
+			'hasil' => $hasil, // Set array hasil dengan isi dari view.php yang diload tadi
+		);
+
+		echo json_encode($callback); // konversi varibael $callback menjadi JSON
+
+		// $this->load->view('layouts/header',$data);
+		// $this->load->view('master/v_jb',$data);
+		// $this->load->view('layouts/footer');
 	}
 
 	public function store()

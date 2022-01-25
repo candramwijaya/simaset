@@ -27,6 +27,22 @@ class SubKategori extends CI_Controller {
 		$this->load->view('layouts/footer');
 	}
 
+	public function filter()
+	{
+		$data = array(
+			'title' => 'Sub Kategori Barang',
+			'active_menu_master' => 'menu-open',
+			'active_menu_mst' => 'active',
+			'active_menu_sk' => 'active',
+			'item' => $this->mk->getSubKategori(),
+			'jb' => $this->mk->getfilterKategoriBarang() 
+		);
+	
+		$this->load->view('layouts/header',$data);
+		$this->load->view('master/sub-kategori/index');
+		$this->load->view('layouts/footer');
+	}
+
 	public function store()
 	{
 		$data = array(
