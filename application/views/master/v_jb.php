@@ -38,6 +38,22 @@
             </div>
         </div>
           <div class="card-body">
+          <form action="<?=base_url('KategoriBarang/filter')?>" method="POST">
+              <div class="row">
+                  <div class="col-3">
+                    <input type="text" class="form-control" placeholder="Masukkan Kata Kunci" name="kata_kunci">
+
+                    </input>
+                  </div>
+                  <div class="col-2">
+                    <button type="submit" class="btn btn-block btn-outline-primary">Search</button>
+                  </div>
+                  <div class="col-2">
+                    <button type="reset" class="btn btn-block btn-outline-danger">Reset</button>
+                  </div>              
+              </div>
+          </form> 
+          <br/>
             <?php echo form_error('jenis_barang'); ?>
             <div class="table-responsive">
                            <table id="example1" class="table table-bordered table-striped table-sm">
