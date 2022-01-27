@@ -136,6 +136,7 @@
                 <label for="picture" class="col-sm-2 col-form-label">Foto Barang</label>
                 <div class="col-sm-6">
                   <input type="file" class="form-control" name="picture">
+                  <!-- <input type="file" name="picture[]" multiple="multiple"> -->
                   <small>Kosongkan jika tidak diisi</small>
                 </div>
               </div>
