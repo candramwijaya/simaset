@@ -79,25 +79,28 @@ class ModelPengadaan extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function getPengadaanAset_new()
+	public function getPengadaanAset_new($status)
 	{
 		$this->db->select('nama_barang,nama_sub,nama_kategori,a.nama_item,a.tahun_pengadaan, a.id_pengadaan,a.volume,a.satuan,a.harga_satuan');
 		$this->db->from('pengadaan a');
 		$this->db->join('barang b', 'b.id_barang = a.nama_item');
 		$this->db->join('sub_kategori c', 'c.kode_sub = b.id_sub_kategori');
 		$this->db->join('kategori_barang d', 'd.id_kategori = c.kategori_id');
-		$this->db->where('status_keranjang','0');
+		$this->db->where('status_keranjang',$status);
 		$this->db->where('id_user',$this->session->userdata('id_user'));
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 
-	public function getPengadaanlihat(){
+	public function getPengadaanlihat($tgl=null){
 		$this->db->select('tgl_keranjang,nama_user,jabatan,count(tgl_keranjang) as Jumlah,SUM(harga_satuan*volume) as total,tahun_pengadaan,status');
 		$this->db->from('pengadaan a');
 		$this->db->join('users b', 'b.id_user = a.id_user');
 		$this->db->where('status_keranjang','1');
 		$this->db->where('a.id_user',$this->session->userdata('id_user'));
+		if(!empty($tgl)){
+			$this->db->where('tgl_keranjang',$tgl);
+		}
 		$this->db->group_by('1,2,3');
 		return $this->db->get();
 	}
@@ -223,6 +226,13 @@ class ModelPengadaan extends CI_Model {
 	{
 		$this->db->where($where);
 		$res = $this->db->delete("pengadaan");
+		return $res;
+	}
+
+	public function deletePengadaan_new($where,$data)
+	{
+		$this->db->where($where);
+		$res = $this->db->update("pengadaan",$data);
 		return $res;
 	}
 

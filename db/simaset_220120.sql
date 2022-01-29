@@ -60,7 +60,11 @@ CREATE TABLE `asets` (
   CONSTRAINT `asets_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `asets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `asets_ibfk_3` FOREIGN KEY (`satuan_id`) REFERENCES `satuan` (`id_satuan`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `asets` */
 
@@ -100,7 +104,11 @@ CREATE TABLE `barang` (
   KEY `id_sub_kategori` (`id_sub_kategori`),
   CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori_barang` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `barang_ibfk_3` FOREIGN KEY (`id_sub_kategori`) REFERENCES `sub_kategori` (`kode_sub`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `barang` */
 
@@ -127,7 +135,11 @@ CREATE TABLE `data_aset` (
   `nama_aset` varchar(128) DEFAULT NULL,
   `harga` double DEFAULT NULL,
   PRIMARY KEY (`id_aset`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `data_aset` */
 
@@ -147,7 +159,11 @@ CREATE TABLE `kategori_barang` (
   `nama_kategori` varchar(128) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id_kategori`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `kategori_barang` */
 
@@ -172,7 +188,11 @@ CREATE TABLE `keputusan_pengadaan` (
   CONSTRAINT `keputusan_pengadaan_ibfk_1` FOREIGN KEY (`id_spesifikasi`) REFERENCES `kriteria_spesifikasi` (`id_spesifikasi`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keputusan_pengadaan_ibfk_2` FOREIGN KEY (`id_kualitas`) REFERENCES `kriteria_kualitas` (`id_kualitas`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keputusan_pengadaan_ibfk_3` FOREIGN KEY (`id_aset`) REFERENCES `data_aset` (`id_aset`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `keputusan_pengadaan` */
 
@@ -191,7 +211,11 @@ CREATE TABLE `kriteria_kualitas` (
   `keterangan` varchar(128) DEFAULT NULL,
   `nilai` double DEFAULT NULL,
   PRIMARY KEY (`id_kualitas`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `kriteria_kualitas` */
 
@@ -211,7 +235,11 @@ CREATE TABLE `kriteria_spesifikasi` (
   `keterangan` varchar(128) DEFAULT NULL,
   `nilai` double DEFAULT NULL,
   PRIMARY KEY (`id_spesifikasi`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `kriteria_spesifikasi` */
 
@@ -231,7 +259,11 @@ CREATE TABLE `lokasi_aset` (
   `nama_lokasi` varchar(128) NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id_lokasi`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `lokasi_aset` */
 
@@ -257,7 +289,11 @@ CREATE TABLE `monitoring_aset` (
   PRIMARY KEY (`id_monitoring`),
   KEY `id_aset` (`id_aset`),
   CONSTRAINT `monitoring_aset_ibfk_1` FOREIGN KEY (`id_aset`) REFERENCES `asets` (`id_aset`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `monitoring_aset` */
 
@@ -286,7 +322,11 @@ CREATE TABLE `mutasi` (
   CONSTRAINT `mutasi_ibfk_1` FOREIGN KEY (`aset_id`) REFERENCES `asets` (`id_aset`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `mutasi_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `mutasi_ibfk_3` FOREIGN KEY (`lokasi_id`) REFERENCES `lokasi_aset` (`id_lokasi`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `mutasi` */
 
@@ -309,7 +349,11 @@ CREATE TABLE `peminjaman` (
   PRIMARY KEY (`id`),
   KEY `aset_id` (`aset_id`),
   CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`aset_id`) REFERENCES `asets` (`id_aset`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `peminjaman` */
 
@@ -337,7 +381,11 @@ CREATE TABLE `pengadaan` (
   PRIMARY KEY (`id_pengadaan`),
   KEY `id_user` (`id_user`),
   CONSTRAINT `pengadaan_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `pengadaan` */
 
@@ -359,7 +407,11 @@ CREATE TABLE `penghapusan` (
   PRIMARY KEY (`id_penghapusan`),
   KEY `id_aset` (`id_aset`),
   CONSTRAINT `penghapusan_ibfk_1` FOREIGN KEY (`id_aset`) REFERENCES `asets` (`id_aset`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `penghapusan` */
 
@@ -374,7 +426,11 @@ CREATE TABLE `satuan` (
   `id_satuan` varchar(20) NOT NULL,
   `nama_satuan` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_satuan`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `satuan` */
 
@@ -394,7 +450,11 @@ CREATE TABLE `sub_kategori` (
   PRIMARY KEY (`kode_sub`),
   KEY `kategori_id` (`kategori_id`),
   CONSTRAINT `sub_kategori_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kategori_barang` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `sub_kategori` */
 
@@ -416,7 +476,11 @@ CREATE TABLE `users` (
   `role` enum('1','2','3') DEFAULT NULL,
   `foto` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_user`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+=======
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+>>>>>>> 3d4992cbfa041a76eacd590865bd7c2deca1e4ab
 
 /*Data for the table `users` */
 

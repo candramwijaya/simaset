@@ -39,30 +39,6 @@
             </div>
         </div>
           <div class="card-body">
-            <?php if ($this->session->userdata('role')=='1' || $this->session->userdata('role')=='2'): ?>
-            <form action="<?=base_url('pengadaan/filter')?>" method="POST" autocomplete="off">
-              <div class="row">
-                <div class="col-4">
-                  <select name="id_lokasi" class="form-control" required>
-                    <option value="">- Pilih Lokasi --</option>
-                    <?php foreach ($lokasi as $row): ?>
-                      <option value="<?=$row['id_lokasi'];?>"><?=$row['nama_lokasi'];?></option>
-                    <?php endforeach ?>      
-                  </select>
-                </div>
-                <div class="col-4">
-                  <input type="text" name="tahun_pengadaan" class="form-control" placeholder="Tahun Pengadaan" required>
-                </div>
-                <div class="col">
-                  <button type="submit" class="btn btn-block btn-outline-primary">Filter</button>
-                </div>
-                <div class="col">
-                  <button type="reset" class="btn btn-block btn-outline-danger">Reset</button>
-                </div>              
-              </div>
-            </form> 
-            <br/> 
-            <?php endif ?>
             <div class="table-responsive">
               <table id="example1" class="table table-bordered table-striped table-sm">
                 <thead>
@@ -91,6 +67,9 @@
                     <td><?php if($row['status']=='0'){echo 'Pengajuan SPV';}else{
                       if($row['status']=='1'){echo 'Pengajuan MGR';}}?></td>
                       <td>
+                        <a href="<?=base_url('pengadaan/excel/'.$row['tgl_keranjang'])?>" class="btn btn-success btn-sm">
+                          <i class="fas fa-download"></i>
+                        </a>
                         <a href="<?=base_url('pengadaan/detail/'.$row['tgl_keranjang'])?>" class="btn btn-success btn-sm">
                           <i class="fas fa-eye"></i>
                         </a>
