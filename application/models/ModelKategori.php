@@ -9,6 +9,14 @@ class ModelKategori extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getfilterKategoriBarang($katakunci)
+	{
+		$query = $this->db->like('nama_kategori',$katakunci);
+		$query = $this->db->or_like('kode_kategori',$katakunci);
+		$query = $this->db->get('kategori_barang');
+		return $query->result_array();
+	}
+
 	public function storeKategoriBarang($data)
 	{
 		$query = $this->db->insert('kategori_barang', $data);

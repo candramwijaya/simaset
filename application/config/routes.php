@@ -21,6 +21,7 @@ $route['statistik'] = 'Statistik/index';
 
 //Master
 $route['barang'] = 'Barang/index';
+$route['barang/filter'] = 'Barang/filter';
 $route['barang/tambah'] = 'Barang/tambahBarang';
 $route['barang/simpan'] = 'Barang/simpanBarang';
 $route['barang/edit/(:any)'] = 'Barang/editBarang/(:any)';
@@ -28,6 +29,7 @@ $route['barang/ubah'] = 'Barang/ubahBarang';
 $route['barang/hapus/(:any)'] = 'Barang/hapusBarang/(:any)';
 //Jenis Barang
 $route['kategori'] = 'KategoriBarang/index';
+$route['kategori/filter'] = 'KategoriBarang/filter';
 $route['kategori/simpan'] = 'KategoriBarang/store';
 $route['kategori/ubah'] = 'KategoriBarang/ubah';
 $route['kategori/hapus/(:any)'] = 'KategoriBarang/hapus/(:any)';

@@ -1,6 +1,12 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="<?=base_url()?>src/backend/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="<?=base_url()?>src/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+<!-- Jquery date timepicker -->
+<link rel="stylesheet" href="<?=base_url()?>src/css/yearpicker.css">
+<script src="/path/to/cdn/jquery.slim.min.js"></script>
+<script src="<?=base_url()?>src/js/yearpicker.js" async></script>
+
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -77,12 +83,60 @@
                 <label for="tahun_perolehan" class="col-sm-2 col-form-label">Tahun Perolehan</label>
                 <div class="col-sm-6">
                   <input type="number" class="form-control" name="tahun_perolehan" placeholder="20XX" required>
+                  <script>
+                    $('.yearpicker').yearpicker();
+                    $('.yearpicker').yearpicker({
+
+                    // Initial Year
+                    year: null,
+
+                    // Start Year
+                    startYear: null,
+
+                    // End Year
+                    endYear: null,
+
+                    // Element tag
+                    itemTag: 'li',
+
+                    // Default CSS classes
+                    selectedClass: 'selected',
+                    disabledClass: 'disabled',
+                    hideClass: 'hide',
+
+                    // Custom template
+                    template: `<div class="yearpicker-container">
+                                <div class="yearpicker-header">
+                                    <div class="yearpicker-prev" data-view="yearpicker-prev">&lsaquo;</div>
+                                    <div class="yearpicker-current" data-view="yearpicker-current">SelectedYear</div>
+                                    <div class="yearpicker-next" data-view="yearpicker-next">&rsaquo;</div>
+                                </div>
+                                <div class="yearpicker-body">
+                                    <ul class="yearpicker-year" data-view="years">
+                                    </ul>
+                                </div>
+                            </div>
+                    `,
+
+                    });
+
+                    $('.yearpicker').yearpicker({
+
+                    onShow: null,
+                    onHide: null,
+                    onChange: function(value){}
+
+                    });
+
+                  </script>
+                  <!-- <input type="text" name="tahun_perolehan" class="form-control yearpicker" placeholder="20XX" required>	 -->
                 </div>
               </div>
               <div class="form-group row">
                 <label for="picture" class="col-sm-2 col-form-label">Foto Barang</label>
                 <div class="col-sm-6">
                   <input type="file" class="form-control" name="picture">
+                  <!-- <input type="file" name="picture[]" multiple="multiple"> -->
                   <small>Kosongkan jika tidak diisi</small>
                 </div>
               </div>

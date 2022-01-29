@@ -1,6 +1,13 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="<?=base_url()?>src/backend/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="<?=base_url()?>src/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+<!-- Jquery date timepicker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -79,16 +86,28 @@
                   <input type="text" name="no_pinjam" value="<?=$item['no_pinjam'];?>" placeholder="Masukan No. Pinjam" class="form-control" required>
                 </div>
               </div>
+              <script>
+		            $( function() {
+            		  $( "#datepicker" ).datepicker();
+        	      } );
+              </script> 
               <div class="form-group row">
                 <label for="tgl_pinjam" class="col-sm-2 col-form-label">Tanggal Pinjam</label>
                 <div class="col-sm-6">
-                  <input type="date" class="form-control" value="<?=$item['tgl_pinjam'];?>" name="tgl_pinjam" required>
+                  <!-- <input type="date" class="form-control" value="<?=$item['tgl_pinjam'];?>" name="tgl_pinjam" required> -->
+                  <input type="text" id="datepicker" name="tgl_pinjam" class="form-control" placeholder="Masukan Tanggal Barang Pinjam" value="<?=$item['tgl_pinjam'];?>" required>
                 </div>
               </div>
+              <script>
+		            $( function() {
+            		  $( "#datepicker1" ).datepicker();
+        	      } );
+              </script> 
               <div class="form-group row">
                 <label for="tgl_pinjam" class="col-sm-2 col-form-label">Tanggal Kembali</label>
                 <div class="col-sm-6">
-                  <input type="date" class="form-control" value="<?=$item['tgl_kembali'];?>" name="tgl_kembali" required>
+                  <!-- <input type="date" class="form-control" value="<?=$item['tgl_kembali'];?>" name="tgl_kembali" required> -->
+                  <input type="text" id="datepicker1" name="tgl_kembali" class="form-control" placeholder="Masukan Tanggal Barang Kembali" value="<?=$item['tgl_kembali'];?>" required>	
                 </div>
               </div>
               <div class="form-group row">

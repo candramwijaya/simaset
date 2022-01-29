@@ -33,6 +33,21 @@ class Barang extends CI_Controller {
 		$this->load->view('layouts/footer');
 	}
 
+	public function filter()
+	{
+		$data = array(
+			'title' => 'Data Barang',
+			'active_menu_master' => 'menu-open',
+			'active_menu_mst' => 'active',
+			'active_menu_brg' => 'active',
+			'barang' => $this->mb->getfilterDataBarang($this->input->post('kata_kunci'))  
+		);
+			
+		$this->load->view('layouts/header',$data);
+		$this->load->view('master/v_barang',$data);
+		$this->load->view('layouts/footer');
+	}
+
 	public function tambahBarang()
 	{
 		$data = array(
