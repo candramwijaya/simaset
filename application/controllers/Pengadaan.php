@@ -209,7 +209,7 @@ class Pengadaan extends CI_Controller {
 			'minharga' => $this->mp->getMinHarga(),
 			'mt' => $this->mm->getMonitoring(),
 			'satuan' => $this->m->getAllData('satuan'),
-			'item' => $this->mp->getPengadaanAset_new(),
+			'item' => $this->mp->getPengadaanAset_new('0'),
 			'user' => $this->m->getAllData('users'),  
 		);
 		}else{
@@ -231,7 +231,7 @@ class Pengadaan extends CI_Controller {
 			'minharga' => $this->mp->getMinHarga(),
 			'mt' => $this->mm->getMonitoring(),
 			'satuan' => $this->m->getAllData('satuan'),
-			'item' => $this->mp->getPengadaanAset_new(),
+			'item' => $this->mp->getPengadaanAset_new('0'),
 			'user' => $this->m->getAllData('users'),  
 			);
 			}else{
@@ -260,8 +260,7 @@ class Pengadaan extends CI_Controller {
 			'active_pengadaan' => 'active',
 			'active_menu_pgd' => 'active',
 			'lokasi' => $this->ml->getLokasi(),
-			'item' => $this->mp->getPengadaanAset_new(),
-			'item_user' => $this->mp->getPengadaanAsetUser($id_user)
+			'item' => $this->mp->getPengadaanlihat()->result_array()
 		);
 		$this->load->view('layouts/header',$data);
 		$this->load->view('pengadaan/v_pengadaan',$data);
@@ -316,7 +315,7 @@ class Pengadaan extends CI_Controller {
 			'active_menu_open_pnd' => 'menu-open',
 			'active_pengadaan' => 'active',
 			'active_menu_pgd' => 'active',
-			'item' => $this->mp->getDetailPengadaanAset($id_pengadaan) 
+			'item' => $this->mp->getPengadaanAset_new('1') 
 		);
 		$this->load->view('layouts/header',$data);
 		$this->load->view('pengadaan/d_pengadaan',$data);
@@ -355,9 +354,10 @@ class Pengadaan extends CI_Controller {
 
 	public function hapusPengadaan($id_pengadaan)
 	{
-		$id_pengadaan = $this->uri->segment(3);
-		$where = array( 'id_pengadaan' => $id_pengadaan);
-		$res = $this->mp->deletePengadaan($where);
+		// $id_pengadaan = $this->uri->segment(3);
+		$where = array( 'tgl_keranjang' => str_replace("%20", ' ', $id_pengadaan));
+		$data['status_keranjang'] = '2';
+		$res = $this->mp->deletePengadaan_new($where,$data);
 		if($res>=1){
 			$this->session->set_flashdata('sukses', 'Dihapus');
 			redirect('pengadaan');
@@ -365,6 +365,14 @@ class Pengadaan extends CI_Controller {
 			$this->session->set_flashdata('gagal', 'Dihapus');
 			redirect('pengadaan');
 		}
+	}
+
+	public function excelPengadaan($tgl_keranjang){
+		$data = array(
+			'item' => $this->mp->getPengadaanAset_new('1'),
+			'idea' => $this->mp->getPengadaanlihat(str_replace('%20', ' ', $tgl_keranjang))->result_array()
+		);
+		$this->load->view('pengadaan/e_pengadaan',$data);
 	}
 
 	public function hapusPengadaankeranjang($id_pengadaan)

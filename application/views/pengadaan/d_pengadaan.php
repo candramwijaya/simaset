@@ -32,83 +32,33 @@
 
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-striped" id="users">
-                  <tbody>
-                    <?php foreach($item as $d){?>                 
-                      <tr>                    
-                        <td width="100px">Yang Mengajukan</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['nama_user'] ?></td>
-                      </tr>
-                      <tr>                       
-                        <td width="100px">Jabatan</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['jabatan'] ?></td>
-                      </tr>
-                      <tr>
-                        <td width="200px">Penempatan Aset</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['nama_lokasi'] ?></td>
-                      </tr>
-                      <tr>
-                        <td width="200px">Nama User</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['user_name'] ?></td>
-                      </tr>
-                      <tr>
-                        <td width="100px">Nama Aset</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['nama_aset'] ?></td>
-                      </tr>
-                      <tr>
-                        <td width="100px">Volume</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['volume'] ?></td>
-                      </tr>
-                      <tr>
-                        <td width="100px">Tahun Pengadaan</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['tahun_pengadaan'] ?></td>
-                      </tr>
-                       <tr>
-                        <td width="100px">Satuan</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['satuan'] ?></td>
-                      </tr>
-                      <tr>
-                        <td width="100px">Harga Satuan</td>
-                        <td width="50px">:</td>
-                        <td><?=rupiah($d['harga_satuan']) ?></td>
-                      </tr>
-                      <tr>
-                        <td width="100px">Total Harga</td>
-                        <td width="50px">:</td>
-                        <td><?=rupiah($d['harga_satuan']*$d['volume']) ?></td>
-                      </tr>                  
-                      <tr>
-                        <td width="100px">Tahun Pengadaan</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['tahun_pengadaan'];?></td>
-                      </tr>
-                      <tr>
-                        <td width="100px">Waktu Input</td>
-                        <td width="50px">:</td>
-                        <td><?=$d['created_at'];?></td>
-                      </tr>
-                      <tr>
-                        <td width="100px">Status</td>
-                        <td width="50px">:</td>
-                        <td>
-                          <?php if ($d['status']=='0'): ?>
-                            <span class="badge badge-danger">Belum Disetujui</span>
-                            <?php else: ?>
-                              <span class="badge badge-success">Disetujui</span>
-                            <?php endif ?>
-                          </td>
-                        </tr>                 
-                      <?php } ?>     
-                    </tbody>
-                  </table>
+              <table id="example1" class="table table-bordered table-striped table-sm">
+                <thead>
+                <tr>
+                  <th>No.</th>
+                  <!-- <th>Nama</th>
+                  <th>Penempatan</th> -->
+                  <th>Nama Aset</th>
+                  <th>Volume</th>
+                  <th>Harga</th>
+                  <th>Tahun</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php $no=1; foreach ($item as $row): ?>               
+                  <tr>
+                    <td><?=$no++;?></td>
+                    <!-- <td><?=$row['nama_user'];?></td>
+                    <td><?=$row['nama_lokasi'];?></td> -->
+                    <td><?=$row['nama_kategori'].' '.$row['nama_sub'].' '.$row['nama_barang'];?></td>
+                    <td><?=$row['volume'].' '.$row['satuan'];?></td>
+                    <td><?=number_format($row['harga_satuan'],0);?></td>
+                    <td><?=$row['tahun_pengadaan'];?></td>
+                    </tr>
+                  <?php endforeach ?>
+            
+                </tbody>
+              </table>
                   <br/>
                   <a href="<?=base_url('pengadaan')?>">
                     <button type="button" class="btn btn-danger">Kembali</button>
