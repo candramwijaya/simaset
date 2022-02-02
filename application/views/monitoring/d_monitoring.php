@@ -138,8 +138,8 @@
                           <td width="100px">Foto Barang</td>
                           <td width="50px">:</td>
                           <td>
-                            <?php if($d['picture']){?>
-                              <img src="<?=base_url();?>src/img/barang/<?=$d['picture'];?>" style="height: 250px;">
+                            <?php if($d['picture_fr']){?>
+                              <img src="<?=base_url();?>src/img/barang/<?=$d['picture_fr'];?>" style="height: 250px;">
                             <?php } ?>
                           </td>
                       </tr> 
