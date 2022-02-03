@@ -270,7 +270,7 @@ class Laporan extends CI_Controller {
 
 	public function searchPengadaan()
 	{
-		$id_lokasi = $this->input->post('id_lokasi');
+		// $id_lokasi = $this->input->post('id_lokasi');
 		$tahun_pengadaan = $this->input->post('tahun_pengadaan');
 
 		$data = array(
@@ -279,8 +279,8 @@ class Laporan extends CI_Controller {
 			'active_menu_lpr' => 'active',
 			'active_menu_lpnd' => 'active',
 			'lokasi' => $this->ml->getLokasi(),
-			'lok' => $this->ml->getLokasiId($id_lokasi),
-			'pnd' => $this->ml->getPengadaan($id_lokasi,$tahun_pengadaan) 
+			// 'lok' => $this->ml->getLokasiId($id_lokasi),
+			'pnd' => $this->ml->getPengadaan($tahun_pengadaan) 
 		);
 
 		if (count($data['pnd'])>0) {
