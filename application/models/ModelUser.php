@@ -21,6 +21,14 @@ class ModelUser extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getDetailUser_x($id_user)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('id_user', $id_user);
+		return $this->db->get();
+	}
+
 
 	public function cekUsername($username)
 	{

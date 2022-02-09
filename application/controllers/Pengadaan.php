@@ -18,6 +18,7 @@ class Pengadaan extends CI_Controller {
 		$this->load->model('Master','m');
 		$this->load->model('ModelKategori','mk');
 		$this->load->model('ModelBarang','mb');
+		$this->load->model('ModelUser','mu');
 
 	}
 
@@ -259,7 +260,6 @@ class Pengadaan extends CI_Controller {
 			'active_menu_open_pnd' => 'menu-open',
 			'active_pengadaan' => 'active',
 			'active_menu_pgd' => 'active',
-			'lokasi' => $this->ml->getLokasi(),
 			'item' => $this->mp->getPengadaanlihat()->result_array()
 		);
 		$this->load->view('layouts/header',$data);
@@ -310,12 +310,13 @@ class Pengadaan extends CI_Controller {
 	public function detailPengadaan($id_pengadaan)
 	{
 		$id_pengadaan = $this->uri->segment(3);
+		$id_pengadaan = str_replace("%20", ' ', $id_pengadaan);
 		$data = array(
 			'title' => 'Pengadaan',
 			'active_menu_open_pnd' => 'menu-open',
 			'active_pengadaan' => 'active',
 			'active_menu_pgd' => 'active',
-			'item' => $this->mp->getPengadaanAset_new('1') 
+			'item' => $this->mp->getPengadaanAset_new1($id_pengadaan) 
 		);
 		$this->load->view('layouts/header',$data);
 		$this->load->view('pengadaan/d_pengadaan',$data);
@@ -369,7 +370,7 @@ class Pengadaan extends CI_Controller {
 
 	public function excelPengadaan($tgl_keranjang){
 		$data = array(
-			'item' => $this->mp->getPengadaanAset_new('1'),
+			'item' => $this->mp->getPengadaanAset_new1(str_replace('%20', ' ', $tgl_keranjang)),
 			'idea' => $this->mp->getPengadaanlihat(str_replace('%20', ' ', $tgl_keranjang))->result_array()
 		);
 		$this->load->view('pengadaan/e_pengadaan',$data);
@@ -390,13 +391,21 @@ class Pengadaan extends CI_Controller {
 	}
 
 	public function PengajuanPengadaan(){
+		$tan = date('Y-m-d H:i:s');
 		$data = array(
 			'status_keranjang' => '1',
-			'tgl_keranjang' => date('Y-m-d H:i:s'),
-        	'device_keranjang' => $_SERVER['HTTP_USER_AGENT'],
-        	'ip_keranjang' => $_SERVER['REMOTE_ADDR']
+			'tgl_keranjang' => $tan
 		);
 		$result = $this->mp->update_PengajuanPengadaan($this->session->userdata('id_user'),$data);
+		$cek = $this->mu->getDetailUser_x($this->session->userdata('id_user'))->row();
+		$datax = array(
+        	'device_keranjang' => $_SERVER['HTTP_USER_AGENT'],
+        	'ip_keranjang' => $_SERVER['REMOTE_ADDR'],
+			'tgl_keranjang' => $tan,
+			'id_user' => $this->session->userdata('id_user'),
+			'jabatan_user'=> $cek->jabatan
+		);
+		$result = $this->mp->insert_data('pengadaan_unik',$datax);
 		redirect('pengajuan');
 	}
 

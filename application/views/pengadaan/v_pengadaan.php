@@ -47,7 +47,6 @@
                   <th>Tanggal Pengajuan</th>
                   <th>User</th>
                   <th>Jabatan</th>
-                  <th>Tahun Pengadaan</th>
                   <th>Jumlah Item</th>
                   <th>Total Harga</th>
                   <th>Status Pengajuan</th>
@@ -60,8 +59,7 @@
                     <td><?=$no++;?></td>
                     <td><?= date('d M Y',strtotime($row['tgl_keranjang']));?></td>
                     <td><?=$row['nama_user'];?></td>
-                    <td><?=$row['jabatan'];?></td>
-                    <td><?=$row['tahun_pengadaan'];?></td>
+                    <td><?=$row['jabatan_user'];?></td>
                     <td><?=number_format($row['Jumlah'],0);?></td>
                     <td><?=number_format($row['total'],0);?></td>
                     <td><?php if($row['status']=='0'){echo 'Pengajuan SPV';}else{

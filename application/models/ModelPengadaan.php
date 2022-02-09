@@ -91,15 +91,29 @@ class ModelPengadaan extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	public function getPengadaanAset_new1($status)
+	{
+		$this->db->select('nama_barang,nama_sub,nama_kategori,a.nama_item,a.tahun_pengadaan, a.id_pengadaan,a.volume,a.satuan,a.harga_satuan');
+		$this->db->from('pengadaan a');
+		$this->db->join('barang b', 'b.id_barang = a.nama_item');
+		$this->db->join('sub_kategori c', 'c.kode_sub = b.id_sub_kategori');
+		$this->db->join('kategori_barang d', 'd.id_kategori = c.kategori_id');
+		$this->db->where('status_keranjang','1');
+		$this->db->where('tgl_keranjang',$status);
+		$this->db->where('id_user',$this->session->userdata('id_user'));
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 
 	public function getPengadaanlihat($tgl=null){
-		$this->db->select('tgl_keranjang,nama_user,jabatan,count(tgl_keranjang) as Jumlah,SUM(harga_satuan*volume) as total,tahun_pengadaan,status');
+		$this->db->select('a.tgl_keranjang,nama_user,jabatan_user,count(a.tgl_keranjang) as Jumlah,SUM(harga_satuan*volume) as total,status');
 		$this->db->from('pengadaan a');
 		$this->db->join('users b', 'b.id_user = a.id_user');
+		$this->db->join('pengadaan_unik c','a.tgl_keranjang=c.tgl_keranjang');
 		$this->db->where('status_keranjang','1');
 		$this->db->where('a.id_user',$this->session->userdata('id_user'));
 		if(!empty($tgl)){
-			$this->db->where('tgl_keranjang',$tgl);
+			$this->db->where('a.tgl_keranjang',$tgl);
 		}
 		$this->db->group_by('1,2,3');
 		return $this->db->get();
@@ -175,6 +189,11 @@ class ModelPengadaan extends CI_Model {
 	public function storePengadaan($data)
 	{
 		$query = $this->db->insert('pengadaan', $data);
+		return $query;
+	}
+	public function insert_data($table,$data)
+	{
+		$query = $this->db->insert($table, $data);
 		return $query;
 	}
 
