@@ -85,8 +85,8 @@
                     <td><?=$row['merek'];?></td>
                     <td><?=$row['tahun_perolehan'];?></td>
                     <td>
-                      <?php if($row['picture']){?>
-                        <img src="<?=base_url();?>src/img/barang/<?=$row['picture'];?>" style="height: 50px;">
+                      <?php if($row['picture_fr']){?>
+                        <img src="<?=base_url();?>src/img/barang/<?=$row['picture_fr'];?>" style="height: 50px;">
                       <?php } ?>  
                     </td>
                     <td>

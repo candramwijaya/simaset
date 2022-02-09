@@ -68,34 +68,68 @@ class Barang extends CI_Controller {
 		$config['upload_path'] = 'src/img/barang/'; 
         $config['allowed_types'] = 'jpg|png|jpeg';  
         $config['encrypt_name'] = TRUE; 
+
+		$config1['upload_path'] = 'src/img/barang/'; 
+        $config1['allowed_types'] = 'jpg|png|jpeg';  
+        $config1['encrypt_name'] = TRUE; 
+
+		$config2['upload_path'] = 'src/img/barang/'; 
+        $config2['allowed_types'] = 'jpg|png|jpeg';  
+        $config2['encrypt_name'] = TRUE; 
 		
 		$this->upload->initialize($config);
 		if(!empty($_FILES['picture']['name'])){
  
             if ($this->upload->do_upload('picture')){
-                $gbr = $this->upload->data();
-                //Compress Image
-                $config['image_library']='gd2';
-                $config['source_image']='src/img/barang/'.$gbr['file_name'];
-                $config['create_thumb']= FALSE;
-                $config['maintain_ratio']= FALSE;
-                $config['quality']= '60%';
-                $config['new_image']= 'src/img/barang/'.$gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
+				$gbr = $this->upload->data();
+				//Compress Image
+				$config['image_library']='gd2';
+				$config['source_image']='src/img/barang/'.$gbr['file_name'];
+				$config['create_thumb']= FALSE;
+				$config['maintain_ratio']= FALSE;
+				$config['quality']= '60%';
+				$config['new_image']= 'src/img/barang/'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				if ($this->upload->do_upload('picture1')){
+					$gbr1 = $this->upload->data();
+					//Compress Image
+					$config1['image_library']='gd2';
+					$config1['source_image']='src/img/barang/'.$gbr1['file_name'];
+					$config1['create_thumb']= FALSE;
+					$config1['maintain_ratio']= FALSE;
+					$config1['quality']= '60%';
+					$config1['new_image']= 'src/img/barang/'.$gbr1['file_name'];
+					$this->load->library('image_lib', $config1);
+					$this->image_lib->resize();
+					if ($this->upload->do_upload('picture2')){
+						$gbr2 = $this->upload->data();
+						//Compress Image
+						$config2['image_library']='gd2';
+						$config2['source_image']='src/img/barang/'.$gbr2['file_name'];
+						$config2['create_thumb']= FALSE;
+						$config2['maintain_ratio']= FALSE;
+						$config2['quality']= '60%';
+						$config2['new_image']= 'src/img/barang/'.$gbr2['file_name'];
+						$this->load->library('image_lib', $config2);
+						$this->image_lib->resize();
 
-                $data = array(
-                	'id_kategori' => $this->input->post('id_kategori'),
-					'id_sub_kategori' => $this->input->post('id_sub_kategori'),
-					'nama_barang' => $this->input->post('nama_barang'),
-					'merek' => $this->input->post('merek'),
-					'tahun_perolehan' => $this->input->post('tahun_perolehan'),
-                	'picture' => $gbr['file_name'],
-                );
-                $this->mb->storeBarang($data);
+						$data = array(
+							'id_kategori' => $this->input->post('id_kategori'),
+							'id_sub_kategori' => $this->input->post('id_sub_kategori'),
+							'nama_barang' => $this->input->post('nama_barang'),
+							'merek' => $this->input->post('merek'),
+							'tahun_perolehan' => $this->input->post('tahun_perolehan'),
+							'picture_fr' => $gbr['file_name'],
+							'picture_bs' => $gbr1['file_name'],
+							'picture_br' => $gbr2['file_name'],
+						);
+						$this->mb->storeBarang($data);
 
-               	$this->session->set_flashdata('sukses', 'Disimpan');
-				redirect('barang');
+						$this->session->set_flashdata('sukses', 'Disimpan');
+						redirect('barang');
+					}
+				}
             }           
         }else{
             $data = array(
@@ -134,11 +168,19 @@ class Barang extends CI_Controller {
 	public function ubahBarang()
 	{
 		$id_barang = $this->input->post('id_barang');
-		if ($_FILES['picture']['name']){
+		if ($_FILES['picture']['name'] || $_FILES['picture1']['name'] || $_FILES['picture2']['name']){
 
 			$config['upload_path'] = 'src/img/barang/'; 
 			$config['allowed_types'] = 'jpeg|jpg|png';  
 			$config['encrypt_name'] = TRUE;
+
+			$config1['upload_path'] = 'src/img/barang/'; 
+			$config1['allowed_types'] = 'jpeg|jpg|png';  
+			$config1['encrypt_name'] = TRUE;
+
+			$config2['upload_path'] = 'src/img/barang/'; 
+			$config2['allowed_types'] = 'jpeg|jpg|png';  
+			$config2['encrypt_name'] = TRUE;
 
 			$this->upload->initialize($config);
 			if ( ! $this->upload->do_upload('picture')){
@@ -146,7 +188,7 @@ class Barang extends CI_Controller {
 				redirect('barang/edit/'.$id_barang);
 			}else{
 				$foto = $this->mb->getSingleDataBarang($id_barang);
-				unlink('src/img/barang/'.$foto['picture']);
+				// unlink('src/img/barang/'.$foto['picture']);
 
 				$gbr = $this->upload->data();
                 $config['image_library']='gd2';
@@ -158,14 +200,42 @@ class Barang extends CI_Controller {
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
 
-                $data = array(
-                	'id_kategori' => $this->input->post('id_kategori'),
-					'id_sub_kategori' => $this->input->post('id_sub_kategori'),
-					'nama_barang' => $this->input->post('nama_barang'),
-					'merek' => $this->input->post('merek'),
-					'tahun_perolehan' => $this->input->post('tahun_perolehan'),
-                	'picture' => $gbr['file_name'],
-                );
+				if ($this->upload->do_upload('picture1')){
+					$gbr1 = $this->upload->data();
+					//Compress Image
+					$config1['image_library']='gd2';
+					$config1['source_image']='src/img/barang/'.$gbr1['file_name'];
+					$config1['create_thumb']= FALSE;
+					$config1['maintain_ratio']= FALSE;
+					$config1['quality']= '60%';
+					$config1['new_image']= 'src/img/barang/'.$gbr1['file_name'];
+					$this->load->library('image_lib', $config1);
+					$this->image_lib->resize();
+					if ($this->upload->do_upload('picture2')){
+						$gbr2 = $this->upload->data();
+						//Compress Image
+						$config2['image_library']='gd2';
+						$config2['source_image']='src/img/barang/'.$gbr2['file_name'];
+						$config2['create_thumb']= FALSE;
+						$config2['maintain_ratio']= FALSE;
+						$config2['quality']= '60%';
+						$config2['new_image']= 'src/img/barang/'.$gbr2['file_name'];
+						$this->load->library('image_lib', $config2);
+						$this->image_lib->resize();
+
+						$data = array(
+							'id_kategori' => $this->input->post('id_kategori'),
+							'id_sub_kategori' => $this->input->post('id_sub_kategori'),
+							'nama_barang' => $this->input->post('nama_barang'),
+							'merek' => $this->input->post('merek'),
+							'tahun_perolehan' => $this->input->post('tahun_perolehan'),
+							'picture_fr' => $gbr['file_name'],
+							'picture_bs' => $gbr1['file_name'],
+							'picture_br' => $gbr2['file_name'],
+						);
+					}
+					
+				}
                 $this->mb->updateBarang($id_barang,$data);
 
                	$this->session->set_flashdata('sukses', 'Diubah');

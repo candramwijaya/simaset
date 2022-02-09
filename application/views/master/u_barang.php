@@ -84,10 +84,27 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="picture" class="col-sm-2 col-form-label">Foto Barang</label>
+                <label for="picture" class="col-sm-2 col-form-label">Foto (Tampak Depan)</label>
                 <div class="col-sm-6">
                   <input type="file" class="form-control" name="picture">
                   <small>Kosongkan jika tidak ingin mengganti foto</small>
+                  <img src="<?= base_url().'src/img/barang/'.$row['picture_fr']?>" max-height="auto" width="75%" style="border: 1px solid #ddd; border-radius: 4px;  padding: 5px;"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="picture" class="col-sm-2 col-form-label">Foto (Tampak Samping)</label>
+                <div class="col-sm-6">
+                  <input type="file" class="form-control" name="picture1">
+                  <small>Kosongkan jika tidak ingin mengganti foto</small>
+                  <img src="<?= base_url().'src/img/barang/'.$row['picture_bs']?>" max-height="auto" width="75%" style="border: 1px solid #ddd; border-radius: 4px;  padding: 5px;"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="picture" class="col-sm-2 col-form-label">Foto (Barcode)</label>
+                <div class="col-sm-6">
+                  <input type="file" class="form-control" name="picture2">
+                  <small>Kosongkan jika tidak ingin mengganti foto</small>
+                  <img src="<?= base_url().'src/img/barang/'.$row['picture_br']?>" max-height="auto" width="75%" style="border: 1px solid #ddd; border-radius: 4px;  padding: 5px;"/>
                 </div>
               </div>
             </div>

@@ -75,7 +75,7 @@
               </a>
               <div class="mt-4">
                 <div class="col">
-                  <b>Lokasi Aset :</b> <?=$lok['nama_lokasi']?>
+                  <!-- <b>Lokasi Aset :</b>  -->
                 </div>
               </div>
               <table class="table table-bordered mt-4">
@@ -92,7 +92,7 @@
                   <?php $no=1; foreach ($pnd as $row): ?>                 
                    <tr>
                      <td><?=$no++;?></td>
-                     <td><?=$row['nama_aset'];?></td>
+                     <td><?=$row['nama_item'];?></td>
                      <td><?=$row['satuan'];?></td>
                      <td><?=$row['volume'];?></td>
                      <td><?=laporan($row['harga_satuan']);?></td>

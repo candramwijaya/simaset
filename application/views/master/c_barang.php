@@ -7,6 +7,27 @@
 <script src="/path/to/cdn/jquery.slim.min.js"></script>
 <script src="<?=base_url()?>src/js/yearpicker.js" async></script>
 
+<!-- css border image -->
+<style>
+#borderimg1 {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url(<?=base_url()?>src/img/border.png) 50 round;
+}
+
+#borderimg2 {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url(<?=base_url()?>src/img/border.png) 20% round;
+}
+
+#borderimg3 {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url(<?=base_url()?>src/img/border.png) 25% round;
+}
+</style>
+
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -133,13 +154,83 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="picture" class="col-sm-2 col-form-label">Foto Barang</label>
-                <div class="col-sm-6">
-                  <input type="file" class="form-control" name="picture">
+                <label for="picture" class="col-sm-2 col-form-label">Foto (Tampak Depan)</label>
+                <div class="col-sm-3">
+                  <input type="file" class="form-control" name="picture" onchange="loadFile(event)">
+                  
+                  <br/>
+                  
+                  <!-- <font size="2px" id="text_fd" style="visibility: hidden" >Foto Tampak Depan</font> -->
+                  <img id="output" max-height="auto" width="75%" style="border: 1px solid #ddd; border-radius: 4px;  padding: 5px;"/>
+
+                  <script>
+                    var loadFile = function(event) {
+                      var output = document.getElementById('output');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
+
+                  
                   <!-- <input type="file" name="picture[]" multiple="multiple"> -->
-                  <small>Kosongkan jika tidak diisi</small>
+                  <!-- <small>Kosongkan jika tidak diisi</small> -->
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label for="picture" class="col-sm-2 col-form-label">Foto (Tampak Samping)</label>
+                <div class="col-sm-3">
+                  <input type="file" class="form-control" name="picture1" onchange="loadFile1(event)">
+                  
+                  <br/>
+                  
+                  <!-- <font size="2px" id="text_fd" style="visibility: hidden" >Foto Tampak Depan</font> -->
+                  <img id="output1" max-height="auto" width="75%" style="border: 1px solid #ddd; border-radius: 4px;  padding: 5px;"/>
+
+                  <script>
+                    var loadFile1 = function(event) {
+                      var output1 = document.getElementById('output1');
+                      output1.src = URL.createObjectURL(event.target.files[0]);
+                      output1.onload = function() {
+                        URL.revokeObjectURL(output1.src) // free memory
+                      }
+                    };
+                  </script>
+
+                  
+                  <!-- <input type="file" name="picture[]" multiple="multiple"> -->
+                  <!-- <small>Kosongkan jika tidak diisi</small> -->
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="picture" class="col-sm-2 col-form-label">Foto (Barcode)</label>
+                <div class="col-sm-3">
+                  <input type="file" class="form-control" name="picture2" onchange="loadFile2(event)">
+                  
+                  <br/>
+                  
+                  <!-- <font size="2px" id="text_fd" style="visibility: hidden" >Foto Tampak Depan</font> -->
+                  <img id="output2" height="50%" width="auto" style="border: 1px solid #ddd; border-radius: 4px;  padding: 5px;"/>
+
+                  <script>
+                    var loadFile2 = function(event) {
+                      var output2 = document.getElementById('output2');
+                      output2.src = URL.createObjectURL(event.target.files[0]);
+                      output2.onload = function() {
+                        URL.revokeObjectURL(output2.src) // free memory
+                      }
+                    };
+                  </script>
+
+                  
+                  <!-- <input type="file" name="picture[]" multiple="multiple"> -->
+                  <!-- <small>Kosongkan jika tidak diisi</small> -->
+                </div>
+              </div>
+
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
