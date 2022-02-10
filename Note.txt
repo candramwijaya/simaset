@@ -1,0 +1,17 @@
+- Data Master - Vendor
+  - Form Registrasi untuk pengajuan vendor masuk
+  - GA confirm apakah masuk sistem, dan jadi opsi pemilihan di menu pengadaan
+
+Alur Pengadaan 
+- Admin mengajukan 
+  - Lihat Data tambah menu edit
+- Approval GA (ubah/hapus/tambahkan komentar)
+
+
+Penomoran No MRI
+-Auto dari tanggal transaksi
+
+Atur Role jadi teks 
+Admin
+SPV
+Manajer
