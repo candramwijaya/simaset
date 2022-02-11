@@ -39,8 +39,8 @@
                   <!-- <th>Nama</th>
                   <th>Penempatan</th> -->
                   <th>Nama Aset</th>
-                  <th>Volume</th>
-                  <th>Harga</th>
+                  <th>Volume / Jumlah</th>
+                  <th>Harga Satuan</th>
                   <th>Tahun</th>
                 </tr>
                 </thead>

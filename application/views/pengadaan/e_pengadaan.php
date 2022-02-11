@@ -58,7 +58,7 @@ $stylebaris = array(
         $tgl='';
         foreach($idea as $cae){
             $nama=$cae['nama_user'];
-            $depar=$cae['jabatan'];
+            $depar=$cae['jabatan_user'];
             $tgl=date('d M Y',strtotime($cae['tgl_keranjang']));
         }
 

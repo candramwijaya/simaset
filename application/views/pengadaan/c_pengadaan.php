@@ -94,17 +94,24 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                    <label for="id_user" class="col-sm-2 col-form-label">Sub Kategori</label>
+                  <label for="id_user" class="col-sm-2 col-form-label">Sub Kategori</label>
                     <div class="col-sm-6">
                       <div id="id_sub_view">
-                      <select name="id_sub_kategori" id="id_user" onchange="nama_itema(this.value)" class="form-control selectx" required>
+                      <select name="id_sub_kategori" id="id_user" onchange="nama_itema(this.value)" class="selectx form-control selectx" required>
                         <?php if(!isset($id_unik)){ ?>
                           <option value="">- Pilih --</option>
-                    <?php }else{
-                      foreach($data_sub_kategori as $sub){
-                      ?>
-                        <option value="<?php echo $sub['kode_sub'] ?>" <?php if($sub['kode_sub']==$data_pengadaan->kategori_id){echo 'selected';} ?>><?php echo $sub['nama_sub'] ?></option>
+                        <?php }else{
+                        foreach($data_sub_kategori as $sub){
+                        ?>
+                          <option value="<?php echo $sub['kode_sub'] ?>" <?php if($sub['kode_sub']==$data_pengadaan->kategori_id){echo 'selected';} ?>><?php echo $sub['nama_sub'] ?></option>
                       <?php }} ?>
+                      </select>
+                      <!-- batas -->
+                      <select name="id_sub_kategori" class="form-control selectx" required>
+                        <option value="">- Pilih --</option>
+                        <?php foreach ($id_sub_kategori as $key) { ?>
+                          <option value="<?=$key['nama_sub'];?>" <?php if(isset($id_unik)){if($data_pengadaan->satuan==$key['nama_sub']){echo 'selected';}} ?>><?=$key['nama_sub'];?></option>
+                        <?php } ?>    
                       </select>
                     </div>
                     </div>
@@ -126,9 +133,9 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="volume" class="col-sm-2 col-form-label">Volume</label>
+                    <label for="volume" class="col-sm-2 col-form-label">Volume / Jumlah</label>
                     <div class="col-sm-6">
-                      <input type="number" class="form-control" name="volume" min="0" placeholder="Masukan Volume.." value="<?php if(isset($id_unik)){echo $data_pengadaan->volume;} ?>" required>
+                      <input type="number" class="form-control" name="volume" min="0" placeholder="Masukan Volume / Jumlah.." value="<?php if(isset($id_unik)){echo $data_pengadaan->volume;} ?>" required>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -191,8 +198,8 @@
                   <!-- <th>Nama</th>
                   <th>Penempatan</th> -->
                   <th>Nama Aset</th>
-                  <th>Volume</th>
-                  <th>Harga</th>
+                  <th>Volume / Jumlah</th>
+                  <th>Harga Satuan</th>
                   <th>Tahun</th>
                   <th>Aksi</th>
                 </tr>

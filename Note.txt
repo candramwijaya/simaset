@@ -2,6 +2,9 @@
   - Form Registrasi untuk pengajuan vendor masuk
   - GA confirm apakah masuk sistem, dan jadi opsi pemilihan di menu pengadaan
 
+Tambah search di dropdown sub kategori panambahan pengajuan
+
+
 Alur Pengadaan 
 - Admin mengajukan 
   - Lihat Data tambah menu edit
